@@ -24,7 +24,6 @@ export const frontendIcons = [
   FaHtml5,
   FaCss3Alt,
   FaReact,
-  SiTypescript,
   TbBrandRedux,
   RiTailwindCssFill,
   SiFramer,
@@ -116,7 +115,7 @@ export default function Hero() {
                   >
                     <Icon
                       size={28}
-                      className="text-white shadow-lg rotate-180 duration-100 transform-content hover:scale-125"
+                      className="text-[var(--color-accent)] shadow-lg shadow-(color:--color-accent) rotate-180 duration-100 transform-content hover:scale-125 p-1 rounded-full"
                       style={{
                         transformOrigin: "center",
                       }}

@@ -52,7 +52,7 @@ export default function ProjectsPage() {
     return <GlobalBackdrop loading={true}></GlobalBackdrop>;
   if (error) return <Error message={error}></Error>;
   return (
-    <div className="flex flex-col gap-4 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-screen ">
+    <div className="flex flex-col gap-4 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-screen mx-20 ">
       {/* Üst Alan: Sidebar Toggle + Filtre */}
 
       <div className="flex align-item-center justify-between items-center p-4 border-b border-[var(--color-muted)]">

@@ -7,7 +7,7 @@ import Social from "../components/common/Social";
 
 function Home() {
   return (
-    <div>
+    <div className="p-6 sm:p-0">
       {/* Fixed social links - always visible */}
       <div className="fixed top-1/2 left-2 -translate-y-1/2 z-50">
         <Social />
@@ -16,7 +16,7 @@ function Home() {
       <main className="flex flex-col  w-full snap-y snap-proximity gap-4">
         <article className="brand flex min-h-screen snap-center mx-6 relative">
           <Hero />
-          <div className="relative items-center flex justify-center">
+          <div className="absolute right-0 top-20  sm:top-50 translate-9 items-center flex justify-center">
             <HomeAbout />
           </div>
         </article>

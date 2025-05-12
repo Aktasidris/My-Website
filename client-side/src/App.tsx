@@ -6,7 +6,10 @@ import Footer from "./components/layouts/Footer";
 //import GlobalBackdrop from "./components/common/GlobalBackdrop";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+
+
 function App() {
+  
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">

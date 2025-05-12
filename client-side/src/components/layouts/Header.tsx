@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
-
+import ThemeSwitcher from "../common/ThemeSwitcher";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,9 @@ export default function Header() {
           <NavLink
             to="/projects"
             className={({ isActive }) =>
-              `hover:text-[var(--color-accent)] transition ${isActive ? " text-[var(--color-accent)]" : ""}`
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
             }
           >
             Projects
@@ -48,7 +50,9 @@ export default function Header() {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              `hover:text-[var(--color-accent)] transition ${isActive ? " text-[var(--color-accent)]" : ""}`
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
             }
           >
             About
@@ -56,23 +60,36 @@ export default function Header() {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hover:text-[var(--color-accent)] transition ${isActive ? " text-[var(--color-accent)]" : ""}`
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
             }
           >
             Contact
           </NavLink>
+          <ThemeSwitcher />
         </nav>
 
         {/* Mobile Hamburger Icon */}
+
         <button
           className="sm:hidden text-2xl text-[var(--color-primary)]"
           onClick={toggleMenu}
           aria-label="Toggle Menu"
         >
-          {isOpen ? <HiX /> : <HiMenu />}
+          {isOpen ? (
+            <div className="flex gap-2 ">
+              <ThemeSwitcher />
+              <HiX />
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <ThemeSwitcher />
+              <HiMenu />
+            </div>
+          )}
         </button>
       </div>
-
       {/* Mobile Dropdown */}
       {isOpen && (
         <div

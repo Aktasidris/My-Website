@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoSend } from "react-icons/io5";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { clearMessages } from "../../store/featuresContact/contactSlice";
 import { sendMessage } from "../../store/featuresContact/contactThunks";
 import { toast } from "react-toastify";
@@ -52,7 +52,7 @@ export default function ContactForm() {
     }
   }, [loading, successMessage, error, dispatch]);
   return (
-    <div className="w-full sm:w-2/3 mx-auto p-6 bg-white/10 backdrop-blur-md rounded-xl shadow-xl m-auto">
+    <div className="w-full sm:w-2/3 mx-auto p-6 bg-[var(--color-background)]/10 backdrop-blur-md rounded-xl shadow-xl m-auto border-1 border-[var(--color-border)]">
       <h1 className="text-center text-3xl font-bold text-[var(--color-primary)]">
         Contact
       </h1>
@@ -65,7 +65,7 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="p-3 rounded bg-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+          className="p-3 rounded bg-[var(--color-background)]/20 placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] shadow-lg text-[(--color-primary)] border-1 border-[var(--color-border)]"
         />
         <input
           type="email"
@@ -74,7 +74,7 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="p-3 rounded bg-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+          className="p-3 rounded bg-[var(--color-background)]/20 text-[(--color-primary)] placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] border-1 border-[var(--color-border)]"
         />
         <input
           type="tel"
@@ -84,7 +84,7 @@ export default function ContactForm() {
           pattern="^\+?[1-9]\d{1,14}$"
           value={formData.telno}
           onChange={handleChange}
-          className="p-3 rounded bg-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+          className="p-3 rounded bg-[var(--color-background)]/20 text-[(--color-primary)] placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] border-1 border-[var(--color-border)]"
         />
 
         {/* Konu (İsteğe Bağlı) */}
@@ -94,7 +94,7 @@ export default function ContactForm() {
           placeholder="Contact Subject (optional)"
           value={formData.subject}
           onChange={handleChange}
-          className="p-3 rounded bg-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+          className="p-3 rounded bg-[var(--color-background)]/20 text-[(--color-primary)] placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] border-1 border-[var(--color-border)]"
         />
         <textarea
           name="message"
@@ -103,7 +103,7 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          className="p-3 rounded bg-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] resize-none"
+          className="p-3 rounded bg-[var(--color-background)]/20 text-[(--color-primary)] placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] border-1 border-[var(--color-border)] resize-none"
         />
         <button
           type="submit"

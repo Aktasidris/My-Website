@@ -37,10 +37,33 @@ Kullanım yeri: Linkler veya tıklanabilir metinler.
     --font-body: 'Inter', sans-serif;
 }
 
+:root[data-theme="light"] {
+    --color-primary: hsl(210, 10%, 23%);
+    --color-secondary: hsl(210, 10%, 70%);
+    --color-accent: hsl(204, 80%, 50%);
+    --color-background: hsl(0, 0%, 100%);
+    --color-muted: hsl(210, 10%, 95%);
+    --color-link: hsl(220, 100%, 60%);
+    --color-error: hsl(0, 100%, 63%);
+    --color-border: hsl(210, 15%, 85%);
+}
+
+:root[data-theme="dark"] {
+    --color-primary: hsl(0, 0%, 90%);
+    --color-secondary: hsl(0, 0%, 60%);
+    --color-accent: hsl(33, 100%, 50%);
+    --color-background: hsl(210, 10%, 10%);
+    --color-muted: hsl(210, 10%, 15%);
+    --color-link: hsl(200, 100%, 60%);
+    --color-error: hsl(0, 100%, 63%);
+    --color-border: hsl(0, 0%, 40%);
+}
+
 html {
     font-family: var(--font-body);
     background-color: var(--color-background);
     color: var(--color-primary);
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 
