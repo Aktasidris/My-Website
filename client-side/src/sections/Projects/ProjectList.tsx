@@ -6,8 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Error from "../../components/Error/Error";
 interface ProjectListProps {
   onToggleSidebar: () => void;
-  onSelectProject: (arg0: object) => void;
-  techStack: string[];
+  onSelectProject: (arg0: RepoModel) => void;
   filteredProjects?: RepoModel[]; // opsiyonel
 }
 
