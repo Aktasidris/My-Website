@@ -9,9 +9,10 @@ export const fetchProjects = createAsyncThunk<RepoModel[]>(
       const response = await api.get("/github/formatted");
       // console.log("Veri geldi:", response.data);
       return response.data;
-    } catch (error: any) {
-      console.error("Veri çekme hatası:", error);
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error) {
+      const err = error as Error;
+      console.error("Veri çekme hatası:", err);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
