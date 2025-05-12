@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+/*
+--color-background
+Kullanım yeri: Sayfanın genel arka planı, kartların arka planı.
+
+--color-primary
+Kullanım yeri: Ana metin rengi, başlıklar, logolar.
+Neden: En okunaklı ve dikkat çeken metin rengin bu.
+
+--color-secondary
+Kullanım yeri: Sınırlar (border), sekmelerin pasif halleri, alt metinler.
+Neden: Kontrast oluşturur ama dikkat dağıtmaz.
+
+--color-accent
+Kullanım yeri: Hover efektleri, butonlar, aktif sekmeler.
+Neden: Kullanıcının dikkatini çekmek için
+
+--color-error
+Kullanım yeri: Hatalar, uyarılar.
+
+--color-link
+Kullanım yeri: Linkler veya tıklanabilir metinler.
+*/
+
+:root {
+    --color-primary: hsl(42, 100%, 70%);
+    --color-secondary: hsl(52, 100%, 87%);
+    --color-accent: hsl(346, 84%, 61%);
+    --color-background: hsl(195, 83%, 16%);
+    --color-muted: hsl(195, 83%, 16%);
+    --color-link: hsl(195, 100%, 50%);
+    --color-error: hsl(0, 100%, 63%);
+    --color-border: hsl(171, 65%, 45%);
+    /* title-paragraf */
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+html {
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-primary);
+}
+
+
+/* Başlıklar için özel font ve boyutlar */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-title);
+    color: var(--color-primary);
+    margin: 0;
+}
+
+
+/* Tailwind reset'i gibi temel iyileştirmeler */
+
+body,
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+body:a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+button {
+    font-family: var(--font-body);
+}
+
+@media screen and (max-width: 600px) {
+    p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+}

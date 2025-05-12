@@ -1,0 +1,25 @@
+services:
+  client:
+    build: ./client-side
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client-side:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - server
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - ./client-side/.env
+
+
+  server:
+    build: ./server-side
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server-side:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - ./server-side/.env

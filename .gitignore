@@ -1,0 +1,17 @@
+# Kök dizin için
+client-side/node_modules/
+client-side/.env
+client-side/.next
+client-side/build
+client-side/dist
+
+server-side/node_modules/
+server-side/.env
+server-side/build
+server-side/dist
+
+# Ortak dosyalar
+.vscode/
+*.log
+.DS_Store
+Thumbs.db

@@ -1,1 +1,14 @@
+# Ortak ayarlar
+node_modules/
 .env
+dist/
+build/
+coverage/
+
+# Editor/IDE dosyaları
+.vscode/
+*.log
+*.DS_Store
+
+# OS dosyaları
+Thumbs.db

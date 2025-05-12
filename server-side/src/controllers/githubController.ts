@@ -1,25 +1,35 @@
-import { Request, Response, RequestHandler  } from 'express';
-import { getUserRepos , getRepoDetails } from '../services/githubService';
+import { Request, Response } from 'express';
+import * as githubService from '../services/githubService';
 
-export const fetchUserRepos = async (req: Request, res: Response) => {
+export const getAllUserRepos  = async (req: Request, res: Response) => {
   try {
-    const repos = await getUserRepos();
-    res.json(repos);
+    const repos = await githubService.getUserRepos();
+    res.status(200).json(repos);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch repositories' });
+    console.error('Error in getUserRepos controller:', error);
+    res.status(500).json({ message: 'Failed to fetch user repositories.' });
   }
 };
-
-export const fetchRepoDetails = async (req: Request, res: Response) => {
+export const getRepoByName  = async (req: Request, res: Response) => {
+  const { name } = req.params;
   try {
-    const { repoName } = req.params;
-    if (!repoName) {
-       res.status(400).json({ message: 'Repository name is required.' });
-       return;
+    const repo = await githubService.getRepoDetails(name);
+    if (!repo) {
+      res.status(404).json({ message: 'Repository not found.' });
     }
-    const repo = await getRepoDetails(repoName);
-    res.json(repo);
+    res.status(200).json(repo);
   } catch (error) {
+    console.error(`Error in getRepoDetails controller for ${name}:`, error);
     res.status(500).json({ message: 'Failed to fetch repository details.' });
+  }
+};
+export const getAllFormattedRepos  = async (req: Request, res: Response) => {
+  try {
+    const formattedRepos = await githubService.getFormattedRepos();
+    res.status(200).json(formattedRepos);
+    // console.log(formattedRepos)
+  } catch (error) {
+    console.error('Error in getFormattedRepos controller:', error);
+    res.status(500).json({ message: 'Failed to fetch formatted repositories.' });
   }
 };
