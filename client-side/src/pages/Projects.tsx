@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useMediaQuery } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
@@ -13,9 +13,10 @@ import { ProjectDetail } from "../sections/Projects/ProjectDetail";
 import ProjectFilter from "../sections/Projects/ProjectFilter";
 import GlobalBackdrop from "../components/common/GlobalBackdrop";
 import Error from "../components/Error/Error";
+import { useAppDispatch } from "../hooks";
 
 export default function ProjectsPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { selectedProject, projects, loading, error } = useSelector(
     (state: RootState) => state.projects
   );

@@ -1,6 +1,8 @@
 import { Backdrop, CircularProgress } from '@mui/material';
-
-const GlobalBackdrop = ({loading}) => {
+interface GlobalBackdropProps {
+  loading: boolean;
+}
+const GlobalBackdrop = ({loading}:GlobalBackdropProps) => {
 
   return (
     <Backdrop

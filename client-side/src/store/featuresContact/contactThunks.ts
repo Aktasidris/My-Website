@@ -9,7 +9,7 @@ export const sendMessage = createAsyncThunk(
       const response = await api.post("/contact",formData);
 
       return response.data.message;
-    } catch (error: any) {
+    } catch (error) {
       console.error("Veri çekme hatası:", error);
       return thunkAPI.rejectWithValue(error.response?.data?.error || "Hata oluştu");
     }

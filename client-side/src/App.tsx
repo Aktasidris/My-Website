@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./router/AppRoutes";
 import Header from "./components/layouts/Header"; // Header'ı import ettik
 import Footer from "./components/layouts/Footer";
-import GlobalBackdrop from "./components/common/GlobalBackdrop";
+//import GlobalBackdrop from "./components/common/GlobalBackdrop";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 function App() {
