@@ -52,9 +52,9 @@ export default function ProjectsPage() {
     return <GlobalBackdrop loading={true}></GlobalBackdrop>;
   if (error) return <Error message={error}></Error>;
   return (
-    <div className="flex flex-col gap-4 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-screen mx-20 ">
+    <div className="flex flex-col sm:gap-2 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-full">
+      
       {/* Üst Alan: Sidebar Toggle + Filtre */}
-
       <div className="flex align-item-center justify-between items-center p-4 border-b border-[var(--color-muted)]">
         <button onClick={toggleSidebar} className="text-2xl">
           {sidebarOpen ? <LuPanelRightOpen /> : <LuPanelLeftOpen />}
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Alt Alan: Liste ve Detay */}
-      <div className="flex flex-1 h-full overflow-hidden">
+      <div className="flex h-full ">
         <AnimatePresence>
           {sidebarOpen && (
             <motion.div
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
         </AnimatePresence>
 
         {(!isMobile || !sidebarOpen) && (
-          <div className="w-full overflow-auto md:w-2/3 p-4">
+          <div className="w-full">
             <ProjectDetail project={selectedProject} />
           </div>
         )}

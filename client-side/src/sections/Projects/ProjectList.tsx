@@ -29,14 +29,11 @@ const ProjectList: FC<ProjectListProps> = ({
     filteredProjects !== undefined ? filteredProjects : projects;
 
   return (
-    <div className="p-4 max-w-full bg-[var(--color-background)] text-[var(--color-primary)] transition-all duration-300">
-      <div className="mt-4 space-y-2 h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-[var(--color-muted)] static">
-        <p className="border-b-1 w-[95vh] absolute  z-20 -translate-y-10 max-w-[350px]">
-          Projeler: {visibleProjects.length}
-        </p>
-
+    <div className="bg-[var(--color-background)] text-[var(--color-primary)] transition-all duration-300 relative">
+      <p className="border-b-1 w-full ">Projeler: {visibleProjects.length}</p>
+      <div className="h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[var(--color-muted)] ">
         {loading === "loading" && <span>Yükleniyor...</span>}
-        {loading === "failed"  && error && <Error message={error}></Error>}
+        {loading === "failed" && error && <Error message={error}></Error>}
 
         {loading === "succeeded" && (
           <AnimatePresence>
@@ -47,7 +44,7 @@ const ProjectList: FC<ProjectListProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="p-4 text-center text-[--color-muted]"
+                className="p-4 text-center text-[var(--color-error)]"
               >
                 Filtreye uygun proje bulunamadı.
               </motion.div>
@@ -62,7 +59,7 @@ const ProjectList: FC<ProjectListProps> = ({
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => handleSelect(project)}
-                    className={`p-3 rounded-lg cursor-pointer transition-all backdrop-blur-sm ${
+                    className={`p-3 rounded-lg cursor-pointer transition-all backdrop-blur-sm mt-2 ${
                       isActive
                         ? "bg-[var(--color-accent)]/30"
                         : "bg-white/10 hover:bg-[var(--color-accent)]/20"
@@ -80,7 +77,7 @@ const ProjectList: FC<ProjectListProps> = ({
                         {project.techStack.slice(0, 3).map((tech, idx) => (
                           <span
                             key={idx}
-                            className="text-[10px] bg-[var(--color-muted)] text-[var(--color-border)] px-2 py-0.5 rounded-full border border-[var(--color-border)]"
+                            className="text-xs bg-[var(--color-muted)] text-[var(--color-border)] px-2 py-0.5 rounded-full border border-[var(--color-border)]"
                           >
                             {tech}
                           </span>
