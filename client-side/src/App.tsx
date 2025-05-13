@@ -7,15 +7,15 @@ import Footer from "./components/layouts/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-
 function App() {
-  
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1">
-          <AppRoutes />
+        <main className="flex-1 flex justify-center">
+          <div className="w-full max-w-7xl px-4 flex flex-col justify-center min-h-[calc(100vh-<header+footer-height>)]">
+            <AppRoutes />
+          </div>
         </main>
         <Footer></Footer>
       </div>

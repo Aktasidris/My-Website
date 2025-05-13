@@ -52,7 +52,7 @@ export default function ContactForm() {
     }
   }, [loading, successMessage, error, dispatch]);
   return (
-    <div className="w-full sm:w-2/3 mx-auto p-6 bg-[var(--color-background)]/10 backdrop-blur-md rounded-xl shadow-xl m-auto border-1 border-[var(--color-border)]">
+    <div className="w-4/5 sm:w-2/3 mx-auto p-6 bg-[var(--color-background)/30 backdrop-blur-xl rounded-xl shadow-lg  shadow-(color:--color-secondary ) m-auto border-1 border-[var(--color-border)]">
       <h1 className="text-center text-3xl font-bold text-[var(--color-primary)]">
         Contact
       </h1>
@@ -81,7 +81,7 @@ export default function ContactForm() {
           name="telno"
           placeholder="+90 555 55 5555 (optional)"
           inputMode="tel"
-          pattern="^\+?[1-9]\d{1,14}$"
+          pattern="^\+?[1-9]\d{1 ,14}$"
           value={formData.telno}
           onChange={handleChange}
           className="p-3 rounded bg-[var(--color-background)]/20 text-[(--color-primary)] placeholder:text-[(--color-primary)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] border-1 border-[var(--color-border)]"

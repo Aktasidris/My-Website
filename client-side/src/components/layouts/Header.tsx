@@ -58,6 +58,17 @@ export default function Header() {
             About
           </NavLink>
           <NavLink
+            to="/cv"
+            onClick={toggleMenu}
+            className={({ isActive }) =>
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
+            }
+          >
+            Cv
+          </NavLink>
+          <NavLink
             to="/contact"
             className={({ isActive }) =>
               `hover:text-[var(--color-accent)] transition ${
@@ -116,6 +127,13 @@ export default function Header() {
             className="hover:text-[var(--color-accent)]"
           >
             About
+          </NavLink>
+          <NavLink
+            to="/cv"
+            onClick={toggleMenu}
+            className="hover:text-[var(--color-accent)]"
+          >
+            Cv
           </NavLink>
           <NavLink
             to="/contact"

@@ -3,7 +3,6 @@ import { iconsset } from "../../../public/icons/iconsdata";
 const TechStack = () => {
     return (
       <div className="flex flex-col justify-center w-full py-3">
-        <h1 className=" text-2xl text*center w-full text-center border-t-1 py-3">Tech Stack</h1>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
             
             {iconsset.map((icon) => (
