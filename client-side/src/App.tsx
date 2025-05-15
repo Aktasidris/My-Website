@@ -12,10 +12,8 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1 flex justify-center">
-          <div className="w-full max-w-7xl px-4 flex flex-col justify-center min-h-[calc(100vh-<header+footer-height>)]">
-            <AppRoutes />
-          </div>
+        <main className="flex-1 flex justify-center w-full max-w-7xl px-4  min-h-[calc(100vh-<header+footer-height>)]">
+          <AppRoutes />
         </main>
         <Footer></Footer>
       </div>

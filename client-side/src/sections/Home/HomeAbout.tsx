@@ -7,7 +7,7 @@ export default function HomeAbout() {
       initial={{ opacity: 0, x: 130 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="flex w-full items-center justify-center text-[var(--color-primary)] z-30 relative min-w-[250px]"
+      className="flex w-full items-center justify-center text-[var(--color-primary)] relative min-w-[250px]"
     >
       <div className="text-center flex flex-col gap-y-4 bg-white/10 p-6 rounded-lg shadow-lg backdrop-blur-md">
         <h2 className="text-xl sm:text-3xl font-bold mb-4">

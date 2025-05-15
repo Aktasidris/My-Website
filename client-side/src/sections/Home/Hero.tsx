@@ -1,4 +1,6 @@
+//libs
 import { motion } from "framer-motion";
+//icons
 import {
   FaReact,
   FaNodeJs,
@@ -9,7 +11,6 @@ import {
 } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { BiLogoVisualStudio } from "react-icons/bi";
-
 import { TbBrandRedux } from "react-icons/tb";
 import {
   SiTypescript,
@@ -30,20 +31,10 @@ export const frontendIcons = [
 ];
 
 // == Backend ==
-export const backendIcons = [
-  FaNodeJs,
-  SiExpress,
-  SiMongodb,
-  SiTypescript,
-];
+export const backendIcons = [FaNodeJs, SiExpress, SiMongodb, SiTypescript];
 
 // == Tools / Deployment / Version Control ==
-export const toolsIcons = [
-  FaGithub,
-  FaDocker,
-  SiVercel,
-  BiLogoVisualStudio ,
-];
+export const toolsIcons = [FaGithub, FaDocker, SiVercel, BiLogoVisualStudio];
 
 const circleConfig = [
   {
@@ -74,18 +65,17 @@ const circleConfig = [
 
 export default function Hero() {
   return (
-    <div className="relative flex items-center justify-center w-full sm:w-1/2 -translate-x-[150px] sm:scale-120">
-      <div className="relative size-[400px] sm:size-[500px] flex items-center justify-center">
-        {circleConfig.map((circle, i) => (
-          <motion.div
-            key={i}
-            animate={{ rotate: 360 * circle.rotateDir }}
-            transition={{
-              duration: 40 + i * 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className={`
+    <div className="relative size-[400px] sm:size-[500px] flex items-center justify-center sm:scale-120 opacity-70">
+      {circleConfig.map((circle, i) => (
+        <motion.div
+          key={i}
+          animate={{ rotate: 360 * circle.rotateDir }}
+          transition={{
+            duration: 40 + i * 10,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className={`
               absolute 
               rounded-full 
               border-2 
@@ -97,36 +87,35 @@ export default function Hero() {
               before:bg-${circle.glowColor || "pink-300"} 
               before:blur-2xl before:opacity-20
             `}
-          >
-            {circle.icons.map((Icon, idx) => {
-              const angle = (360 / circle.icons.length) * idx;
-              return (
+        >
+          {circle.icons.map((Icon, idx) => {
+            const angle = (360 / circle.icons.length) * idx;
+            return (
+              <div
+                key={idx}
+                className="absolute z-10"
+                style={{
+                  transform: `rotate(${angle}deg) translate(${circle.radius}px)`,
+                }}
+              >
                 <div
-                  key={idx}
-                  className="absolute z-10"
                   style={{
-                    transform: `rotate(${angle}deg) translate(${circle.radius}px)`,
+                    transform: `rotate(${-angle}deg)`,
                   }}
                 >
-                  <div
+                  <Icon
+                    size={28}
+                    className="text-[var(--color-accent)] shadow-lg shadow-(color:--color-accent) rotate-180 duration-100 transform-content hover:scale-125 p-1 rounded-full"
                     style={{
-                      transform: `rotate(${-angle}deg)`,
+                      transformOrigin: "center",
                     }}
-                  >
-                    <Icon
-                      size={28}
-                      className="text-[var(--color-accent)] shadow-lg shadow-(color:--color-accent) rotate-180 duration-100 transform-content hover:scale-125 p-1 rounded-full"
-                      style={{
-                        transformOrigin: "center",
-                      }}
-                    />
-                  </div>
+                  />
                 </div>
-              );
-            })}
-          </motion.div>
-        ))}
-      </div>
+              </div>
+            );
+          })}
+        </motion.div>
+      ))}
     </div>
   );
 }

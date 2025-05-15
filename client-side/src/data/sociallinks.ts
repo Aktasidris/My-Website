@@ -4,17 +4,17 @@ export const socialLinks = [
     {
         title: "LinkedIn",
         url: "https://www.linkedin.com/in/idrisaktas",
-        icon: FaLinkedin,color:"#004788"
+        Icon: FaLinkedin,color:"#004788"
     }, {
         title: "Whatsapp",
-        url: "https://wa.me/+905456998012", icon: FaWhatsappSquare,color:"#25D366"
+        url: "https://wa.me/+905456998012", Icon: FaWhatsappSquare,color:"#25D366"
     }, {
         title: "Github",
-        url: "https://github.com/Aktasidris", icon: FaGithubSquare,color:"#181717"
+        url: "https://github.com/Aktasidris", Icon: FaGithubSquare,color:"#181717"
     }, {
         title: "Mail",
         url: "mailto:aktasidris355@gmail.com",
-        icon: BiLogoGmail,
+        Icon: BiLogoGmail,
         color:"#EA4335"
     }
 

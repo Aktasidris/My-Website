@@ -1,5 +1,5 @@
 export default function About() {
   return (
-    <div>about</div>
+    <div className="mt-10">about</div>
   )
 }
