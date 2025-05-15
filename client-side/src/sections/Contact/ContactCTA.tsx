@@ -3,7 +3,7 @@ import { FaHome, FaCodeBranch } from "react-icons/fa";
 
 export default function ContactCTA() {
   return (
-    <div className="mt-10 flex flex-col justify-center gap-4 w-full order-last md:order-first">
+    <div className="flex flex-col justify-center  gap-4 w-full order-last md:order-first">
       <CTABox to="/" text="Turn to Home" buttonLabel="Home" Icon={FaHome} />
       <CTABox
         to="/projects"

@@ -25,7 +25,7 @@ export default function Contact() {
           just want to say hi — feel free to drop a message.
         </motion.p>
       </div>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-center  md:items-start gap-4">
         <ContactCTA />
         <ContactForm />
       </div>
