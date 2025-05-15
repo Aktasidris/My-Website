@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Link } from "react-router-dom";
-import { FaMailBulk, FaCodeBranch, FaInfo, FaInfoCircle } from "react-icons/fa";
+import { FaMailBulk, FaInfoCircle } from "react-icons/fa";
 import { TbFileCv } from "react-icons/tb";
 import CTABox from "../../components/common/CTABox";
 
@@ -14,9 +14,7 @@ export default function AboutSection() {
       className="flex w-full items-center justify-center text-[var(--color-primary)] relative min-w-[250px]"
     >
       <div className="text-center flex flex-col gap-6 bg-white/10 p-6 sm:p-8 rounded-lg shadow-lg backdrop-blur-md max-w-3xl">
-        <h1 className="text-3xl sm:text-4xl font-bold">
-          Selam! Ben İdris
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold">Selam! Ben İdris</h1>
 
         <span className="text-[var(--color-accent)] text-base sm:text-lg font-semibold">
           <TypeAnimation
