@@ -14,13 +14,16 @@ import ProjectFilter from "../sections/Projects/ProjectFilter";
 import GlobalBackdrop from "../components/common/GlobalBackdrop";
 import Error from "../components/Error/Error";
 import { useAppDispatch } from "../hooks";
-
+import Sectioninfo from "../sections/Home/Sectioninfo";
+import { projectsPageTexts } from "../data/projectsPage";
 export default function ProjectsPage() {
+const lang = useSelector((state: RootState) => state.app.lang);
+
   const dispatch = useAppDispatch();
   const { selectedProject, projects, loading, error } = useSelector(
     (state: RootState) => state.projects
   );
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const handleSelectProject = (project: RepoModel) => {
     dispatch(setSelectedProject(project));
@@ -50,20 +53,19 @@ export default function ProjectsPage() {
   );
   if (loading === "loading")
     return <GlobalBackdrop loading={true}></GlobalBackdrop>;
-  if (error) return <Error message={error}></Error>;
+  if (error) return <Error message={`${projectsPageTexts.error[lang]} ${error}`}></Error>;
   return (
-    <div className="flex flex-col sm:gap-2 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-full">
-      
+    <div className="flex flex-col sm:gap-2 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-full w-full">
       {/* Üst Alan: Sidebar Toggle + Filtre */}
       <div className="flex align-item-center justify-between items-center p-4 border-b border-[var(--color-muted)]">
-        <button onClick={toggleSidebar} className="text-2xl">
+        <button onClick={toggleSidebar} className="text-2xl" aria-label={projectsPageTexts.ariaLabel[lang]}>
           {sidebarOpen ? <LuPanelRightOpen /> : <LuPanelLeftOpen />}
         </button>
         <ProjectFilter projects={projects} onFilter={handleFilter} />
       </div>
 
       {/* Alt Alan: Liste ve Detay */}
-      <div className="flex h-full ">
+      <div className="flex h-full gap-2">
         <AnimatePresence>
           {sidebarOpen && (
             <motion.div
@@ -87,7 +89,14 @@ export default function ProjectsPage() {
 
         {(!isMobile || !sidebarOpen) && (
           <div className="w-full">
-            <ProjectDetail project={selectedProject} />
+            {selectedProject != null ? (
+              <ProjectDetail project={selectedProject} />
+            ) : (
+              <Sectioninfo
+                title={projectsPageTexts.emptyState.title[lang]}
+                description={projectsPageTexts.emptyState.description[lang]}
+              />
+            )}
           </div>
         )}
       </div>

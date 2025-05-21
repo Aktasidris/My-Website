@@ -1,8 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 import ThemeSwitcher from "../common/ThemeSwitcher";
+import LangSwitcher from "../common/LangSwitcher";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
+import { headerdata } from "../../data/headercomponent";
 export default function Header() {
+  const lang = useSelector((state: RootState) => state.app.lang);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -19,14 +24,19 @@ export default function Header() {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <header className="sticky top-0 z-50 bg-[var(--color-background)]/80 backdrop-blur">
+    <header className="sticky top-0 z-50 bg-[var(--color-background)]/80 backdrop-blur text-md sm:text-lg md:text-xl ">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center text-[var(--color-primary)]">
-        <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">
-          -IDRIS AKTAS_
-        </h1>
+        <div className="flex gap-4 items-center justify-center">
+          <Link
+            to="/"
+            className="text-md sm:text-lg md:text-xl  font-semibold tracking-tight"
+            children={"- IDRIS AKTAS -"}
+          ></Link>
+          <LangSwitcher />
+        </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden sm:flex gap-6 text-sm font-medium" ref={menuRef}>
+        <nav className="hidden sm:flex gap-3 md:gap-6 text-sm font-medium" ref={menuRef}>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -35,7 +45,7 @@ export default function Header() {
               }`
             }
           >
-            Home
+            {headerdata[lang].navlinks.home}
           </NavLink>
           <NavLink
             to="/projects"
@@ -45,7 +55,7 @@ export default function Header() {
               }`
             }
           >
-            Projects
+            {headerdata[lang].navlinks.projects}
           </NavLink>
           <NavLink
             to="/about"
@@ -55,7 +65,7 @@ export default function Header() {
               }`
             }
           >
-            About
+            {headerdata[lang].navlinks.about}
           </NavLink>
           <NavLink
             to="/cv"
@@ -69,6 +79,17 @@ export default function Header() {
             Cv
           </NavLink>
           <NavLink
+            to="/testimonials"
+            onClick={toggleMenu}
+            className={({ isActive }) =>
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
+            }
+          >
+            {headerdata[lang].navlinks.testimonials}
+          </NavLink>
+          <NavLink
             to="/contact"
             className={({ isActive }) =>
               `hover:text-[var(--color-accent)] transition ${
@@ -76,30 +97,29 @@ export default function Header() {
               }`
             }
           >
-            Contact
+            {headerdata[lang].navlinks.contact}
           </NavLink>
-          <ThemeSwitcher />
         </nav>
 
         {/* Mobile Hamburger Icon */}
-
-        <button
-          className="sm:hidden text-2xl text-[var(--color-primary)]"
-          onClick={toggleMenu}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? (
-            <div className="flex gap-2 ">
-              <ThemeSwitcher />
-              <HiX />
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <ThemeSwitcher />
-              <HiMenu />
-            </div>
-          )}
-        </button>
+        <div className="flex gap-2">
+          <ThemeSwitcher />
+          <button
+            className="sm:hidden text-2xl text-[var(--color-primary)]"
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? (
+              <div className="flex gap-2 ">
+                <HiX />
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <HiMenu />
+              </div>
+            )}
+          </button>
+        </div>
       </div>
       {/* Mobile Dropdown */}
       {isOpen && (
@@ -112,21 +132,21 @@ export default function Header() {
             onClick={toggleMenu}
             className="hover:text-[var(--color-accent)]"
           >
-            Home
+            {headerdata[lang].navlinks.home}
           </NavLink>
           <NavLink
             to="/projects"
             onClick={toggleMenu}
             className="hover:text-[var(--color-accent)]"
           >
-            Projects
+            {headerdata[lang].navlinks.projects}
           </NavLink>
           <NavLink
             to="/about"
             onClick={toggleMenu}
             className="hover:text-[var(--color-accent)]"
           >
-            About
+            {headerdata[lang].navlinks.about}
           </NavLink>
           <NavLink
             to="/cv"
@@ -140,7 +160,7 @@ export default function Header() {
             onClick={toggleMenu}
             className="hover:text-[var(--color-accent)]"
           >
-            Contact
+            {headerdata[lang].navlinks.contact}
           </NavLink>
         </div>
       )}

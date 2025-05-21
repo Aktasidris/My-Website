@@ -1,13 +1,15 @@
 import { FaGraduationCap } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { GiStarGate } from "react-icons/gi";
-import { educationsdata } from "../../data/educationsdata";
+import { homedata } from "../../data/home";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export default function Education() {
+const lang = useSelector((state: RootState) => state.app.lang);
   return (
     <section className="w-full grid sm:grid-cols-2 gap-6 p-4 sm:p-8">
-        
-      {educationsdata.map((education, index) => (
+      {homedata.edusection.schools.map((education, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 30 }}
@@ -24,12 +26,12 @@ export default function Education() {
           <div className="flex flex-col gap-1 w-full">
             <div className="flex justify-between items-center w-full">
               <h1 className="text-lg sm:text-xl font-bold text-[var(--color-primary)]">
-                {education.title}
+                {education.title[lang]}
               </h1>
             </div>
 
             <p className="text-sm sm:text-base text-[var(--color-secondary)]">
-              {education.department}
+              {education.department[lang]}
             </p>
 
             <span className="text-xs sm:text-sm text-[var(--color-secondary)] mt-1">

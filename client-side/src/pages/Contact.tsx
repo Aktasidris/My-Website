@@ -1,10 +1,12 @@
 import ContactForm from "../sections/Contact/ContactForm";
 import { motion } from "framer-motion";
 import ContactCTA from "../sections/Contact/ContactCTA";
-
+import { contactpagedata } from "../data/contactPage";
+import { useAppSelector } from "../hooks";
+import { RootState } from "../store";
 export default function Contact() {
-  return (
-    <div className=" flex flex-col justify-between w-full gap-8 sm:gap-4 ">
+const lang = useAppSelector((state: RootState) => state.app.lang);   return (
+    <div className=" flex flex-col justify-between w-full h-full gap-8 sm:gap-4 ">
       <div className="flex flex-col items-center justify-center gap-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -12,7 +14,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-4xl sm:text-5xl font-bold text-[var(--color-primary)] text-center"
         >
-          Get in Touch
+          {contactpagedata.title[lang]}
         </motion.h1>
 
         <motion.p
@@ -21,8 +23,7 @@ export default function Contact() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-center max-w-xl text-[var(--color-secondary)]"
         >
-          I’d love to hear from you. Whether you have a question, proposal or
-          just want to say hi — feel free to drop a message.
+          {contactpagedata.description[lang]}
         </motion.p>
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-center  md:items-start gap-4">

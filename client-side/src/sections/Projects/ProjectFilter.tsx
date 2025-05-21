@@ -2,13 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineFilterList, MdClear } from "react-icons/md";
 import { GrTechnology } from "react-icons/gr";
-
+import { filterdata } from "../../data/projectsPage";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 interface FilterBarProps {
   projects: { techStack: string[] }[];
   onFilter: (selectedTechs: string[]) => void;
 }
 
 const FilterBar = ({ projects, onFilter }: FilterBarProps) => {
+const lang = useSelector((state: RootState) => state.app.lang);
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -54,7 +57,7 @@ const FilterBar = ({ projects, onFilter }: FilterBarProps) => {
           >
             {tech}
             <button
-              className="ml-2"
+              className="ml-2 capitalize"
               onClick={() =>
                 setSelectedTechs((prev) => prev.filter((t) => t !== tech))
               }
@@ -70,7 +73,7 @@ const FilterBar = ({ projects, onFilter }: FilterBarProps) => {
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary)]/80"
       >
-        <MdOutlineFilterList className="mr-2" /> Filtrele
+        <MdOutlineFilterList className="mr-2" />{filterdata.filterbutton[lang]}
       </button>
 
       {/* Filtre Dropdown */}
@@ -84,11 +87,11 @@ const FilterBar = ({ projects, onFilter }: FilterBarProps) => {
               onClick={clearFilters}
               className="mt-2 text-[var(--color-secondary)] text-sm hover:underline flex items-center justify-center"
             >
-              Tümünü Temizle <MdClear  className="hover:text-[var(--color-error)] text-lg"/>
+              {filterdata.clearbutton[lang]}<MdClear  className="hover:text-[var(--color-error)] text-lg"/>
             </button>
             {allTechs.map((tech, index) => (
               <div key={index} className="flex items-center justify-between">
-                <label className="text-sm text-[var(--color-primary)] flex items-center gap-1.5">
+                <label className="text-sm text-[var(--color-primary)] flex items-center gap-1.5 capitalize">
                   <GrTechnology></GrTechnology>
                   {tech}
                 </label>

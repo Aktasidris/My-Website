@@ -3,9 +3,9 @@ services:
     build: ./client-side
     ports:
       - "5173:5173"
-    volumes:
-      - ./client-side:/usr/src/app
-      - /usr/src/app/node_modules
+    # volumes:
+    #   - ./client-side:/usr/src/app
+    #   - /usr/src/app/node_modules
     depends_on:
       - server
     environment:

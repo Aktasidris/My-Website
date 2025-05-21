@@ -5,8 +5,12 @@ import Education from "../sections/Education/Education";
 import Social from "../components/common/Social";
 import { FaCodeBranch, FaMailBulk, FaQuoteRight } from "react-icons/fa";
 import About from "../sections/Home/About";
-import Testimonials from "../components/common/Testimonials";
+import Sectioninfo from "../sections/Home/Sectioninfo";
+import { homedata } from "../data/home";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 export default function Home() {
+const lang = useSelector((state: RootState) => state.app.lang);
   return (
     <div className="p-6 sm:p-0 relative w-full h-full">
       {/* Sabit sosyal linkler */}
@@ -23,53 +27,52 @@ export default function Home() {
         <section>
           <About />
         </section>
-
         {/* Referanslar */}
         <section className="flex flex-col items-center gap-6">
-          <h2 className="text-2xl font-bold text-center mb-2">Referanslar</h2>
-          <p className="text-center text-[var(--color-secondary)] max-w-lg">
-            Takım arkadaşlarımdan, eğitmenlerimden ve yöneticilerimden gelen
-            geri bildirimler.
-          </p>
-          <Testimonials /> {/* bu component içinde yorum kartları olacak */}
-          <CTABox
-            text="Daha fazla yorum ve detay için referanslar sayfasına göz at."
-            to="/testimonials"
-            buttonLabel="Tüm Referansları Gör"
-            Icon={FaQuoteRight}
+          <Sectioninfo
+            title={homedata.refsection.title[lang]}
+            description={homedata.refsection.description[lang]}
+            cta={{
+              text: homedata.refsection.cta.text[lang],
+              to: "/testimonials",
+              buttonlabel: homedata.refsection.cta.buttonlabel[lang],
+              Icon: FaQuoteRight,
+            }}
           />
         </section>
-
         {/* Eğitim */}
         <section>
-          <h2 className="text-2xl font-bold text-center mb-4">Eğitim</h2>
+          <Sectioninfo
+            title={homedata.edusection.title[lang]}
+            description={homedata.edusection.description[lang]}
+          />
           <Education />
         </section>
-
         {/* Tech Stack & Teknolojiler */}
         <section>
-          <h2 className="text-2xl font-bold text-center mb-4">Kullandığım Teknolojiler</h2>
+          <Sectioninfo
+            title={homedata.techstack.title[lang]}
+            description={homedata.techstack.description[lang]}
+          />
           <TechStack />
           <CTABox
-            text="Bu araçları gerçek projelerde nasıl kullandığımı merak ediyor musunuz?"
+            text={homedata.techstack.cta.text[lang]}
             to="/projects"
-            buttonLabel="See Projects"
+            buttonLabel={homedata.techstack.cta.buttonlabel[lang]}
             Icon={FaCodeBranch}
           />
         </section>
-
         {/* İşbirliği / Proje CTA */}
-        <section className="text-center flex flex-col items-center gap-6">
-          <h2 className="text-2xl font-bold">Beraber Proje Geliştirelim</h2>
-          <p className="max-w-md text-[var(--color-secondary)]">
-            Yeni projelere açığım! Freelancer olarak çalışabilir, ekip
-            projelerine katkı sağlayabilirim.
-          </p>
-          <CTABox
-            text="Fikrin mi var, işin mi var? Hadi detayları konuşalım."
-            to="/contact"
-            buttonLabel="İletişime Geç"
-            Icon={FaMailBulk}
+        <section className="text-center flex flex-col items-start sm:items-center gap-6">
+          <Sectioninfo
+            title={homedata.contactcta.title[lang]}
+            description={homedata.contactcta.description[lang]}
+            cta={{
+              text: homedata.contactcta.cta.text[lang],
+              to: "/contact",
+              buttonlabel: homedata.contactcta.cta.buttonlabel[lang],
+              Icon: FaMailBulk,
+            }}
           />
         </section>
       </main>

@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+import { projectDetaildata } from "../../data/projectsPage";
 import { RepoModel } from "../../types/RepoModel";
 import { FaSquareGithub } from "react-icons/fa6";
+import { RootState } from "../../store";
 
 export function FrontSide({ project }: { project: RepoModel }) {
+const lang = useSelector((state: RootState) => state.app.lang);
   return (
     <div
       className="absolute inset-0 bg-[var(--color-card)] text-[var(--color-foreground)] px-4 py-4 rounded shadow overflow-auto backface-hidden"
@@ -17,11 +21,11 @@ export function FrontSide({ project }: { project: RepoModel }) {
           className="inline-flex items-center gap-2 mt-2 text-[var(--color-link)] hover:underline"
         >
           <FaSquareGithub className="size-6" />
-          <span className="text-sm">GitHub'da Görüntüle</span>
+          <span className="text-sm">{projectDetaildata[lang].frontside.githublink}</span>
         </a>
       )}
       <div className="mt-4">
-        <h3 className="font-semibold mb-1">Teknolojiler</h3>
+        <h3 className="font-semibold mb-1">{projectDetaildata[lang].frontside.techtitle}</h3>
         <div className="flex gap-2 flex-wrap">
           {project.techStack?.map((tech, idx) => (
             <span

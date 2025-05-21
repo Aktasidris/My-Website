@@ -9,20 +9,14 @@ interface ProjectDetailProps {
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
   const [flipped, setFlipped] = useState(false);
-  if (!project) {
-    return (
-      <div className="ms-4 text-[var(--color-secondary)]">
-        Select a project...
-      </div>
-    );
-  }
+
   const handleContent = () => {
     setFlipped((prev) => !prev);
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto flex flex-col gap-4 items-center">
-      <FlipCard project={project} flipped={flipped} />
+    <div className="w-full flex flex-col gap-4 items-center">
+      {project && <FlipCard project={project} flipped={flipped} />}
       <FlipButton flipped={flipped} onClick={handleContent} />
     </div>
   );

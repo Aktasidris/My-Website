@@ -4,6 +4,7 @@ import { RepoModel } from "../../types/RepoModel";
 import { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Error from "../../components/Error/Error";
+import { projectListdata } from "../../data/projectsPage";
 interface ProjectListProps {
   onToggleSidebar: () => void;
   onSelectProject: (arg0: RepoModel) => void;
@@ -15,6 +16,7 @@ const ProjectList: FC<ProjectListProps> = ({
   onSelectProject,
   filteredProjects,
 }) => {
+const lang = useSelector((state: RootState) => state.app.lang);
   const { projects, loading, error, selectedProject } = useSelector(
     (state: RootState) => state.projects
   );
@@ -30,9 +32,9 @@ const ProjectList: FC<ProjectListProps> = ({
 
   return (
     <div className="bg-[var(--color-background)] text-[var(--color-primary)] transition-all duration-300 relative">
-      <p className="border-b-1 w-full ">Projeler: {visibleProjects.length}</p>
-      <div className="h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[var(--color-muted)] ">
-        {loading === "loading" && <span>Yükleniyor...</span>}
+      <p className="border-b-1 w-full ">{projectListdata[lang].title}: {visibleProjects.length}</p>
+      <div className="h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[var(--color-muted)] hide-scrollbar px-2 ">
+        {loading === "loading" && <span>{projectListdata[lang].loading}</span>}
         {loading === "failed" && error && <Error message={error}></Error>}
 
         {loading === "succeeded" && (
@@ -46,7 +48,7 @@ const ProjectList: FC<ProjectListProps> = ({
                 transition={{ duration: 0.3 }}
                 className="p-4 text-center text-[var(--color-error)]"
               >
-                Filtreye uygun proje bulunamadı.
+                {projectListdata[lang].noProjectsFound}
               </motion.div>
             ) : (
               visibleProjects.map((project) => {
@@ -69,7 +71,7 @@ const ProjectList: FC<ProjectListProps> = ({
                       {project.name}
                     </p>
                     <p className="text-sm text-[var(--color-primary)]/70 line-clamp-2">
-                      {project.description || "Açıklama yok"}
+                      {project.description || projectListdata[lang].noDescription}
                     </p>
 
                     {project.techStack && project.techStack.length > 0 && (

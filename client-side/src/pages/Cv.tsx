@@ -1,5 +1,9 @@
 import CvViewer from "../sections/CV/CvViewer";
 
 export default function Cv() {
-  return <CvViewer></CvViewer>;
+  return (
+    <div className="w-full h-full">
+      <CvViewer></CvViewer>
+    </div>
+  );
 }
