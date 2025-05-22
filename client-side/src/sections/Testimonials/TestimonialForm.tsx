@@ -4,10 +4,21 @@ import { submitTestimonial } from "../../store/featuresTestimonials/testimonials
 import { resetSuccess } from "../../store/featuresTestimonials/TestimonialsSlice";
 import { TestimonialFormInput } from "../../store/featuresTestimonials/testimonialTypes";
 import { useIPCommented } from "./useIPCommentLimiter";
+import { Avatar } from "@mui/material";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { testimonialdata } from "../../data/testimonialPage";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { FaCommentDots } from "react-icons/fa";
+import Error from "../../components/Error/Error";
 
 const TestimonialForm = () => {
+  const lang = useSelector((state: RootState) => state.app.lang);
+
   const dispatch = useAppDispatch();
-  const { success, loading } = useAppSelector((state) => state.testimonials);
+  const { success, loading, error } = useAppSelector(
+    (state) => state.testimonials
+  );
   const { ip: userIp, loading: ipLoading } = useIPCommented();
 
   const [form, setForm] = useState<TestimonialFormInput>({
@@ -47,42 +58,45 @@ const TestimonialForm = () => {
   };
 
   if (ipLoading) {
-    return <p className="text-center">Yükleniyor...</p>;
+    return (
+      <p className="text-center animate-spin">
+        <AiOutlineLoading3Quarters />
+      </p>
+    );
   }
-
+ // if (error) return <Error message={error} />;
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 p-4 border rounded-md shadow-md max-w-xl mx-auto bg-[var(--color-muted)]"
+      className="w-full bg-[var(--color-muted)] shadow-2xl p-4"
     >
-      <div>
-        <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
-          Adınız
-        </label>
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-[var(--color-border)] rounded bg-white dark:bg-[var(--color-background)] text-[var(--color-primary)]"
-          required
-        />
+      <div className="flex items-center gap-2">
+        <Avatar sx={{ height: 60, width: 60 }}></Avatar>
+        <div className="w-full">
+          <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
+            {testimonialdata[lang].testimonialform.placeholders.name}
+          </label>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-[var(--color-border)] rounded bg-white dark:bg-[var(--color-background)] text-[var(--color-primary)]"
+            required
+          />
+          <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
+            {testimonialdata[lang].testimonialform.placeholders.role}
+          </label>
+          <input
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-[var(--color-border)] rounded bg-white dark:bg-[var(--color-background)] text-[var(--color-primary)]"
+          />
+        </div>
       </div>
-
       <div>
         <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
-          Pozisyon (isteğe bağlı)
-        </label>
-        <input
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-[var(--color-border)] rounded bg-white dark:bg-[var(--color-background)] text-[var(--color-primary)]"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
-          Yorumunuz
+          {testimonialdata[lang].testimonialform.placeholders.textarea}
         </label>
         <textarea
           name="comment"
@@ -92,15 +106,25 @@ const TestimonialForm = () => {
           rows={4}
           required
         />
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-[var(--color-accent)] text-white px-4 py-2 rounded hover:bg-opacity-90 transition w-full flex items-center justify-center gap-2"
+        >
+          {loading
+            ? testimonialdata[lang].testimonialform.button.loading
+            : testimonialdata[lang].testimonialform.button.label}
+          {loading ? (
+            <span className="animate-spin">
+              <AiOutlineLoading3Quarters />
+            </span>
+          ) : (
+            <span className="animate-bounce">
+              <FaCommentDots />
+            </span>
+          )}
+        </button>
       </div>
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="bg-[var(--color-accent)] text-white px-4 py-2 rounded hover:bg-opacity-90 transition w-full"
-      >
-        {loading ? "Gönderiliyor..." : "Yorumu Gönder"}
-      </button>
     </form>
   );
 };

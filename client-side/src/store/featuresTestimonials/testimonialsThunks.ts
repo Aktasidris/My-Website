@@ -1,20 +1,35 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TestimonialFormInput, TestimonialData } from "./testimonialTypes";
+import api from "../../services/api";
+import { AxiosError } from "axios";
 
 export const submitTestimonial = createAsyncThunk<TestimonialData, TestimonialFormInput>(
     "testimonials/submit",
-    async (formData) => {
-        // API yoksa bu şekilde simüle edebiliriz
-        const enrichedData: TestimonialData = {
-            ...formData,
-            createddate: new Date().toISOString(),
-            user: "/avatar3.png", // default avatar
-        };
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await api.post("/api/testimonials", formData);
+            return response.data;
+        } catch (err) {
+            const error = err as AxiosError<{ message: string }>
+            return rejectWithValue(error.response?.data?.message || "Yorum gönderilemedi.");
+        }
+    }
+);
 
-        // // backend olsaydı:
-        // const response = await axios.post("/api/testimonials", enrichedData);
-        // return response.data;
-
-        return enrichedData;
+//fetch to db for get all testimonial list
+export const fetchTestimonials = createAsyncThunk<
+    TestimonialData[], // başarı durumunda dönecek veri tipi
+    void,              // parametre gönderilmiyor
+    { rejectValue: string }
+>(
+    "testimonials/fetchTestimonials",
+    async (_, { rejectWithValue }) => {
+        try {
+            const res = await api.get("/api/testimonials"); // örnek endpoint
+            return res.data;
+        } catch (err) {
+            const error = err as AxiosError<{ message: string }>
+            return rejectWithValue(error.response?.data?.message || "Yorumlar alınamadı.");
+        }
     }
 );
