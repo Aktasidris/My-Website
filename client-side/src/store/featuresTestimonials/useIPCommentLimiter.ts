@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../../services/api";
 
 type IPCheckResult = {
     ip: string;
@@ -21,7 +22,7 @@ export const useIPCommented = (): IPCheckResult => {
                 setIp(userIp);
 
                 // IP ile backend'e istekte bulun
-                const checkResponse = await axios.get(`/api/testimonials/check-ip/${userIp}`);
+                const checkResponse = await api.get(`/testimonials/check-ip/${userIp}`);
                 setHasCommented(checkResponse.data.hasCommented);
             } catch (error) {
                 console.error("IP kontrolü yapılırken hata oluştu:", error);

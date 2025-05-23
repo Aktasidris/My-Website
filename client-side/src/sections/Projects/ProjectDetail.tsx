@@ -11,8 +11,9 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
   const [flipped, setFlipped] = useState(false);
 
   const handleContent = () => {
-    setFlipped((prev) => !prev);
+    setFlipped(!flipped);
   };
+  if (!project) return <p>nulll</p>;
 
   return (
     <div className="w-full flex flex-col gap-4 items-center">

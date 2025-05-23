@@ -17,7 +17,9 @@ import { useAppDispatch } from "../hooks";
 import Sectioninfo from "../sections/Home/Sectioninfo";
 import { projectsPageTexts } from "../data/projectsPage";
 export default function ProjectsPage() {
-const lang = useSelector((state: RootState) => state.app.lang);
+  console.log("ProjectDetail");
+
+  const lang = useSelector((state: RootState) => state.app.lang);
 
   const dispatch = useAppDispatch();
   const { selectedProject, projects, loading, error } = useSelector(
@@ -53,12 +55,19 @@ const lang = useSelector((state: RootState) => state.app.lang);
   );
   if (loading === "loading")
     return <GlobalBackdrop loading={true}></GlobalBackdrop>;
-  if (error) return <Error message={`${projectsPageTexts.error[lang]} ${error}`}></Error>;
+  if (error)
+    return (
+      <Error message={`${projectsPageTexts.error[lang]} ${error}`}></Error>
+    );
   return (
     <div className="flex flex-col sm:gap-2 bg-[var(--color-background)] text-[var(--color-primary)] transition-colors relative h-full w-full">
       {/* Üst Alan: Sidebar Toggle + Filtre */}
       <div className="flex align-item-center justify-between items-center p-4 border-b border-[var(--color-muted)]">
-        <button onClick={toggleSidebar} className="text-2xl" aria-label={projectsPageTexts.ariaLabel[lang]}>
+        <button
+          onClick={toggleSidebar}
+          className="text-2xl"
+          aria-label={projectsPageTexts.ariaLabel[lang]}
+        >
           {sidebarOpen ? <LuPanelRightOpen /> : <LuPanelLeftOpen />}
         </button>
         <ProjectFilter projects={projects} onFilter={handleFilter} />

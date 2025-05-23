@@ -1,47 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+//hooks and store
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { submitTestimonial } from "../../store/featuresTestimonials/testimonialsThunks";
-import { resetSuccess } from "../../store/featuresTestimonials/TestimonialsSlice";
+import {
+  fetchTestimonials,
+  submitTestimonial,
+} from "../../store/featuresTestimonials/testimonialsThunks";
+
 import { TestimonialFormInput } from "../../store/featuresTestimonials/testimonialTypes";
-import { useIPCommented } from "./useIPCommentLimiter";
-import { Avatar } from "@mui/material";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { testimonialdata } from "../../data/testimonialPage";
-import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+//muı and icons
+import { Avatar } from "@mui/material";
 import { FaCommentDots } from "react-icons/fa";
-import Error from "../../components/Error/Error";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+//lang data
+import { testimonialdata } from "../../data/testimonialPage";
+import { toast } from "react-toastify";
 
-const TestimonialForm = () => {
-  const lang = useSelector((state: RootState) => state.app.lang);
+type TestimonialFormProps = {
+  userIp: string;
+  onSubmitSuccess: () => void;
+};
 
+const TestimonialForm: React.FC<TestimonialFormProps> = ({
+  userIp,
+  onSubmitSuccess,
+}) => {
+  const lang = useAppSelector((state: RootState) => state.app.lang);
   const dispatch = useAppDispatch();
   const { success, loading, error } = useAppSelector(
     (state) => state.testimonials
   );
-  const { ip: userIp, loading: ipLoading } = useIPCommented();
 
   const [form, setForm] = useState<TestimonialFormInput>({
     name: "",
     role: "",
     comment: "",
-    userIp: "",
+    userIp,
   });
 
   useEffect(() => {
-    if (userIp) {
-      setForm((prev) => ({ ...prev, userIp }));
-    }
+    setForm((prev) => ({ ...prev, userIp }));
   }, [userIp]);
 
   useEffect(() => {
     if (success) {
-      setForm({ name: "", role: "", comment: "", userIp: userIp || "" });
-      setTimeout(() => {
-        dispatch(resetSuccess());
-      }, 3000);
+      setForm({ name: "", role: "", comment: "", userIp });
+      toast.success(`${error} yorumunuz eklendi.`);
     }
-  }, [success, userIp, dispatch]);
+    if (error) {
+      toast.error(`${error}}`);
+    }
+    if (loading) {
+      toast.info(`${error} mesajınız gönderiliyor`);
+    }
+  }, [success, loading, error, userIp, dispatch]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,23 +67,17 @@ const TestimonialForm = () => {
     if (form.name && form.comment && form.userIp) {
       dispatch(submitTestimonial(form));
     }
+    dispatch(fetchTestimonials());
+    onSubmitSuccess();
   };
 
-  if (ipLoading) {
-    return (
-      <p className="text-center animate-spin">
-        <AiOutlineLoading3Quarters />
-      </p>
-    );
-  }
- // if (error) return <Error message={error} />;
   return (
     <form
       onSubmit={handleSubmit}
       className="w-full bg-[var(--color-muted)] shadow-2xl p-4"
     >
       <div className="flex items-center gap-2">
-        <Avatar sx={{ height: 60, width: 60 }}></Avatar>
+        <Avatar sx={{ height: 60, width: 60 }} />
         <div className="w-full">
           <label className="block text-sm font-medium mb-1 text-[var(--color-primary)]">
             {testimonialdata[lang].testimonialform.placeholders.name}

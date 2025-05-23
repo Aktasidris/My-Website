@@ -9,7 +9,7 @@ const lang = useSelector((state: RootState) => state.app.lang);
   return (
     <div
       className="absolute inset-0 bg-[var(--color-card)] text-[var(--color-foreground)] px-4 py-4 rounded shadow overflow-auto backface-hidden"
-      style={{ backfaceVisibility: "hidden" }}
+     
     >
       <h2 className="text-2xl font-semibold mb-2">{project.name}</h2>
       <p className="mb-2">{project.description}</p>

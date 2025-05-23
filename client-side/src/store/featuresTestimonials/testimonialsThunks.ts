@@ -7,7 +7,7 @@ export const submitTestimonial = createAsyncThunk<TestimonialData, TestimonialFo
     "testimonials/submit",
     async (formData, { rejectWithValue }) => {
         try {
-            const response = await api.post("/api/testimonials", formData);
+            const response = await api.post("/testimonials", formData);
             return response.data;
         } catch (err) {
             const error = err as AxiosError<{ message: string }>
@@ -25,7 +25,7 @@ export const fetchTestimonials = createAsyncThunk<
     "testimonials/fetchTestimonials",
     async (_, { rejectWithValue }) => {
         try {
-            const res = await api.get("/api/testimonials"); // örnek endpoint
+            const res = await api.get("/testimonials"); // örnek endpoint
             return res.data;
         } catch (err) {
             const error = err as AxiosError<{ message: string }>

@@ -8,12 +8,16 @@ import { AppDispatch, RootState } from "../../store";
 import { fetchTestimonials } from "../../store/featuresTestimonials/testimonialsThunks";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Error from "../../components/Error/Error";
-
+import Sectioninfo from "../Home/Sectioninfo";
+import { testimonialdata } from "../../data/testimonialPage";
 
 export default function TestimonialsList() {
   const dispatch = useDispatch<AppDispatch>();
   const { list, loading, error } = useSelector(
     (state: RootState) => state.testimonials
+  );
+  const { lang } = useSelector(
+    (state: RootState) => state.app
   );
 
   useEffect(() => {
@@ -51,6 +55,7 @@ export default function TestimonialsList() {
       </span>
     );
   if (error) return <Error message={error}></Error>;
+  if(!list || list.length == 0)return <Sectioninfo title={testimonialdata[lang].emptysection.title} description={testimonialdata[lang].emptysection.message} />
   return (
     <div className="flex flex-col gap-6 w-full">
       <div
@@ -62,10 +67,10 @@ export default function TestimonialsList() {
         onTouchEnd={() => setIsPaused(false)}
       >
         <div ref={containerRef} className="overflow-visible py-2 h-full">
-          <motion.div animate={controls} className="flex gap-6 w-max">
+          <motion.div animate={controls} className="flex gap-6 w-max px-4">
             {list.map((testimonial, idx) => (
               <TestimonialCard
-                key={idx} 
+                key={idx}
                 testimonial={testimonial}
                 onExpandChange={setIsPaused}
               />
