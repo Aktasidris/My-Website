@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RepoModel } from "../../types/RepoModel";
+
 import api from "../../services/api";
+import { LightRepoModel, RepoModel } from "./projectTypes";
 //canlıya alındığında url güncellenecek
-export const fetchProjects = createAsyncThunk<RepoModel[]>(
+export const fetchProjects = createAsyncThunk<LightRepoModel[]>(
   "projects/fetchProjects",
   async (_, thunkAPI) => {
     try {
-      const response = await api.get("/github/formatted");
-      // console.log("Veri geldi:", response.data);
+      const response = await api.get("/github/repos");
+       console.log("Veri geldi:", response.data);
       return response.data;
     } catch (error) {
       const err = error as Error;

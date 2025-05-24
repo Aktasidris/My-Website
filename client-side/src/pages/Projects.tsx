@@ -4,33 +4,25 @@ import { useMediaQuery } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuPanelLeftOpen, LuPanelRightOpen } from "react-icons/lu";
 import { RootState } from "../store";
-import { setSelectedProject } from "../store/featuresProjects/projectSlice";
-
 import { fetchProjects } from "../store/featuresProjects/projectThunks";
-import { RepoModel } from "../types/RepoModel";
+
 import ProjectList from "../sections/Projects/ProjectList";
 import { ProjectDetail } from "../sections/Projects/ProjectDetail";
 import ProjectFilter from "../sections/Projects/ProjectFilter";
-import GlobalBackdrop from "../components/common/GlobalBackdrop";
 import Error from "../components/Error/Error";
 import { useAppDispatch } from "../hooks";
 import Sectioninfo from "../sections/Home/Sectioninfo";
 import { projectsPageTexts } from "../data/projectsPage";
 export default function ProjectsPage() {
-  console.log("ProjectDetail");
-
   const lang = useSelector((state: RootState) => state.app.lang);
 
   const dispatch = useAppDispatch();
-  const { selectedProject, projects, loading, error } = useSelector(
+  const { selectedProject, projects, error } = useSelector(
     (state: RootState) => state.projects
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const handleSelectProject = (project: RepoModel) => {
-    dispatch(setSelectedProject(project));
-    if (isMobile) setSidebarOpen(true);
-  };
+
   //side bar açılıp kapanma
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
@@ -53,8 +45,7 @@ export default function ProjectsPage() {
       )
     )
   );
-  if (loading === "loading")
-    return <GlobalBackdrop loading={true}></GlobalBackdrop>;
+
   if (error)
     return (
       <Error message={`${projectsPageTexts.error[lang]} ${error}`}></Error>
@@ -86,7 +77,6 @@ export default function ProjectsPage() {
               className="w-full md:w-1/3 border-r border-[var(--color-muted)]"
             >
               <ProjectList
-                onSelectProject={handleSelectProject}
                 onToggleSidebar={toggleSidebar}
                 filteredProjects={
                   filteredTechs.length > 0 ? filteredProjects : undefined
@@ -99,7 +89,7 @@ export default function ProjectsPage() {
         {(!isMobile || !sidebarOpen) && (
           <div className="w-full">
             {selectedProject != null ? (
-              <ProjectDetail project={selectedProject} />
+              <ProjectDetail />
             ) : (
               <Sectioninfo
                 title={projectsPageTexts.emptyState.title[lang]}

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ContactFormData } from "../../types/ContactModel";
+import { ContactFormData } from "./ContactModel";
 import api from "../../services/api";
 import { AxiosError } from "axios";
 //canlıya alındığında url güncellenecek

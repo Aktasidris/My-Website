@@ -1,7 +1,8 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { RepoModel, SubProject } from '../models/RepoModel';
-import { VercelProject } from '../models/VercelModel';
+import { VercelProject} from '../types/VercelModel'
+import { RepoModel } from '../types/RepoModel';
+
 
 dotenv.config();
 
@@ -41,7 +42,6 @@ export const matchLiveUrlsWithRepos = async (repos: RepoModel[]): Promise<RepoMo
             return {
                 ...repo,
                 subProjects: repo.subProjects,
-                repoUrl: repo.repoUrl,
                 techStack: repo.techStack,
                 readme: repo.readme,
                 name: repo.name,
@@ -67,4 +67,25 @@ export const matchLiveUrlsWithRepos = async (repos: RepoModel[]): Promise<RepoMo
             subProjects: updatedSubProjects,
         };
     });
+};
+
+export const matchLiveUrlsWithSingleRepo = async (repo: RepoModel): Promise<RepoModel> => {
+  const vercelProjects = await getVercelProjects();
+
+  const matchedMain = vercelProjects.find(v => v.name === repo.name);
+  const liveUrl = matchedMain?.latestDeploymentUrl;
+
+  const updatedSubProjects = repo.subProjects?.map(sub => {
+    const matchedSub = vercelProjects.find(v => v.name === sub.name);
+    return {
+      ...sub,
+      liveUrl: matchedSub?.latestDeploymentUrl,
+    };
+  });
+
+  return {
+    ...repo,
+    liveUrl,
+    subProjects: updatedSubProjects,
+  };
 };
