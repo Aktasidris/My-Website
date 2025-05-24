@@ -14,7 +14,7 @@ export const headerdata = {
             projects: "Projects",
             about: "About",
             testimonials: "Testimonials",
-            contact: "Constact",
+            contact: "Contact",
         },
 
     }

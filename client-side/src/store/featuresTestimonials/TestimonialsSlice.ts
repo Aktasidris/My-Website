@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TestimonialState } from "./testimonialTypes";
-import { submitTestimonial } from "./testimonialsThunks";
+import { fetchTestimonials, submitTestimonial } from "./testimonialsThunks";
 
 const initialState: TestimonialState = {
     data: [],
+    list: [],
     loading: false,
     error: null,
     success: false,
@@ -32,7 +33,19 @@ const testimonialSlice = createSlice({
             .addCase(submitTestimonial.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || "Bir hata oluştu";
+            }).addCase(fetchTestimonials.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchTestimonials.fulfilled, (state, action) => {
+                state.loading = false;
+                state.list = action.payload;
+            })
+            .addCase(fetchTestimonials.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
             });
+
     },
 });
 

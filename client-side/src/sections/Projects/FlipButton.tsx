@@ -9,7 +9,8 @@ interface FlipButtonProps {
 }
 
 export function FlipButton({ flipped, onClick }: FlipButtonProps) {
-const lang = useSelector((state: RootState) => state.app.lang);
+  const lang = useSelector((state: RootState) => state.app.lang);
+
   return (
     <button
       onClick={onClick}
@@ -18,7 +19,8 @@ const lang = useSelector((state: RootState) => state.app.lang);
     >
       {flipped ? (
         <>
-          <FaArrowLeft />{projectDetaildata[lang].flipbutton}
+          <FaArrowLeft />
+          {projectDetaildata[lang].flipbutton.label}
         </>
       ) : (
         <>

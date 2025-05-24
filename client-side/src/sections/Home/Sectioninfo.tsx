@@ -25,7 +25,7 @@ export default function Sectioninfo({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       viewport={{ once: true }}
-      className="bg-[var(--color-accent)]/10 p-4 rounded mt-6 text-center flex flex-col items-center justify-center gap-4 w-full"
+      className="bg-[var(--color-accent)]/10 p-4 rounded text-center flex flex-col items-center justify-center gap-4 w-full h-full"
     >
       <h2 className="text-2xl font-bold text-center mb-2">{title}</h2>
       <p className="text-center text-[var(--color-secondary)] max-w-lg">

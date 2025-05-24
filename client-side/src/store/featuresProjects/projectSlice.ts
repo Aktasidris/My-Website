@@ -4,7 +4,7 @@ import { fetchProjects, fetchProjectByName } from "./projectThunks";
 
 const initialState: ProjectState = {
   projects: [],
-  selectedProject: null,
+  selectedProject:null,
   loading: "idle",
   error: null,
 };

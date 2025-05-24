@@ -112,6 +112,7 @@ button {
 
 .backface-hidden {
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hide-scrollbar::-webkit-scrollbar {

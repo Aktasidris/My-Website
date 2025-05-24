@@ -10,28 +10,20 @@ import { testimonialdata } from "../data/testimonialPage";
 export default function Testimonials() {
   const lang = useSelector((state: RootState) => state.app.lang);
   return (
-    <div className="w-full h-full flex flex-col gap-6 sm:p-4 relative">
-      {/**
-       <TestimonialsSection>
-        │___ <Sectioninfo>+<CTABox>
-        |
-        ├── <CTABox />                   → Referans olmaya teşvik kutusu (CTA)
-        │
-        ├── <TestimonialsList>          → DB'den gelen yorumları listeler
-        │   ├── <TestimonialCard />     → Her bir yorum kartı
-        │
-        ├── <UserFeedbackArea>          → Form mu teşekkür mü? (IP'ye göre conditional render)
-        │   ├── <ThanksCard />          → Daha önce yorum yapmışsa
-        │   └── <TestimonialForm />     → İlk defa yorum yapacaksa
-       */}
+    <div className="w-full h-full flex flex-col gap-6 p-2 sm:p-4 relative items-center justify-center">
+      <div className="flex flex-col sm:flex-row gap-4 w-full h-full ">
+        <div className="w-full sm:w-1/2">
+          <Sectioninfo
+            title={testimonialdata[lang].sectioninfo.title}
+            description={testimonialdata[lang].sectioninfo.decription}
+          />
+        </div>
 
-      <div className="w-full flex flex-col sm:flex-row gap-4">
-        <Sectioninfo
-          title={testimonialdata[lang].sectioninfo.title}
-          description={testimonialdata[lang].sectioninfo.decription}
-        />
-        <UserFeedbackArea />
+        <div className="w-full sm:w-1/2">
+          <UserFeedbackArea />
+        </div>
       </div>
+
       <TestimonialsList />
     </div>
   );

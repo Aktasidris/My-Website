@@ -36,7 +36,10 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden sm:flex gap-3 md:gap-6 text-sm font-medium" ref={menuRef}>
+        <nav
+          className="hidden sm:flex gap-3 md:gap-6 text-sm font-medium"
+          ref={menuRef}
+        >
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -154,6 +157,17 @@ export default function Header() {
             className="hover:text-[var(--color-accent)]"
           >
             Cv
+          </NavLink>
+          <NavLink
+            to="/testimonials"
+            onClick={toggleMenu}
+            className={({ isActive }) =>
+              `hover:text-[var(--color-accent)] transition ${
+                isActive ? " text-[var(--color-accent)]" : ""
+              }`
+            }
+          >
+            {headerdata[lang].navlinks.testimonials}
           </NavLink>
           <NavLink
             to="/contact"

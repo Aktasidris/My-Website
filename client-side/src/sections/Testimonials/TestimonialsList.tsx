@@ -3,40 +3,27 @@ import { useEffect, useRef, useState } from "react";
 import TestimonialCard from "./TestimonialCard";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-const testdata = [
-  {
-    name: "İdris",
-    user: "/avatar1.png",
-    role: "Frontend Developer",
-    comment:
-      "Performans gerçekten çok iyi. Detaylara önem verilmiş. Performans gerçekten çok iyi. Detaylara önem verilmiş.",
-    createddate: new Date().toISOString(),
-  },
-  {
-    name: "Zeynep",
-    user: "/avatar2.png",
-    role: "UX Designer",
-    comment: "Renk paleti harika, kullanım kolaylığı da yüksek.",
-    createddate: new Date().toISOString(),
-  },
-  {
-    name: "Ahmet",
-    user: "/avatar3.png",
-    role: "Backend Dev",
-    comment: "Performans gerçekten çok iyi. Detaylara önem verilmiş.",
-    createddate: new Date().toISOString(),
-  },
-  {
-    name: "Mert",
-    user: "/avatar3.png",
-    role: "CTO",
-    comment: "Kod yapısı sade ve anlaşılır, tebrikler.",
-    createddate: new Date().toISOString(),
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { fetchTestimonials } from "../../store/featuresTestimonials/testimonialsThunks";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Error from "../../components/Error/Error";
+import Sectioninfo from "../Home/Sectioninfo";
+import { testimonialdata } from "../../data/testimonialPage";
 
 export default function TestimonialsList() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { list, loading, error } = useSelector(
+    (state: RootState) => state.testimonials
+  );
+  const { lang } = useSelector(
+    (state: RootState) => state.app
+  );
+
+  useEffect(() => {
+    dispatch(fetchTestimonials());
+  }, [dispatch]);
+
   const controls = useAnimation();
   const { ref, inView } = useInView({ triggerOnce: false });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,6 +48,14 @@ export default function TestimonialsList() {
     }
   }, [inView, isPaused]);
 
+  if (loading)
+    return (
+      <span className="animate-spin">
+        <AiOutlineLoading3Quarters />
+      </span>
+    );
+  if (error) return <Error message={error}></Error>;
+  if(!list || list.length == 0)return <Sectioninfo title={testimonialdata[lang].emptysection.title} description={testimonialdata[lang].emptysection.message} />
   return (
     <div className="flex flex-col gap-6 w-full">
       <div
@@ -72,12 +67,12 @@ export default function TestimonialsList() {
         onTouchEnd={() => setIsPaused(false)}
       >
         <div ref={containerRef} className="overflow-visible py-2 h-full">
-          <motion.div animate={controls} className="flex gap-6 w-max">
-            {[...testdata, ...testdata].map((t, idx) => (
+          <motion.div animate={controls} className="flex gap-6 w-max px-4">
+            {list.map((testimonial, idx) => (
               <TestimonialCard
-                testimonial={t}
                 key={idx}
-                onExpandChange={(expanded) => setIsPaused(expanded)}
+                testimonial={testimonial}
+                onExpandChange={setIsPaused}
               />
             ))}
           </motion.div>
