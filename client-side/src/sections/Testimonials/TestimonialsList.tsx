@@ -16,9 +16,7 @@ export default function TestimonialsList() {
   const { list, loading, error } = useSelector(
     (state: RootState) => state.testimonials
   );
-  const { lang } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { lang } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
     dispatch(fetchTestimonials());
@@ -55,7 +53,13 @@ export default function TestimonialsList() {
       </span>
     );
   if (error) return <Error message={error}></Error>;
-  if(!list || list.length == 0)return <Sectioninfo title={testimonialdata[lang].emptysection.title} description={testimonialdata[lang].emptysection.message} />
+  if (!list || list.length == 0)
+    return (
+      <Sectioninfo
+        title={testimonialdata[lang].emptysection.title}
+        description={testimonialdata[lang].emptysection.message}
+      />
+    );
   return (
     <div className="flex flex-col gap-6 w-full">
       <div

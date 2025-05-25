@@ -45,13 +45,13 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({
   useEffect(() => {
     if (success) {
       setForm({ name: "", role: "", comment: "", userIp });
-      toast.success(`${error} yorumunuz eklendi.`);
+      toast.success(`${form.name} yorumunuz eklendi.`);
     }
     if (error) {
       toast.error(`${error}}`);
     }
     if (loading) {
-      toast.info(`${error} mesajınız gönderiliyor`);
+      toast.info(`${form.name} mesajınız gönderiliyor`);
     }
   }, [success, loading, error, userIp, dispatch]);
 
