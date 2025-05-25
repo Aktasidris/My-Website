@@ -1,6 +1,3 @@
-### 📁 `README.root.md`
-
-````markdown
 # Personal Portfolio – İdris Aktaş
 
 Tam kapsamlı bir full-stack portföy projesi.
