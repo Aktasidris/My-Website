@@ -1,29 +1,52 @@
-# Client side project
+# Frontend – Personal Portfolio
 
-# Component Açıklama
+Bu dizin, React tabanlı frontend uygulamasını içerir.
 
-- <RepoList /> Sol listeyi gösterir (repos isim listesi, collapse kontrolü vs.)
-- <RepoDetail /> Sağ tarafta repo detaylarını gösterir (açıklama, iframe, link vs.)
-- <ErrorBoundary /> Error durumunda kullanıcıya nazik bir mesaj gösterir
-- <Loading /> API çağrılarında spinner veya skeleton yüklenme animasyonu
-- <Filter /> Üstte filtreleme inputu ve/veya dropdown
-- <IconSet /> Teknolojilere özel ikonları yöneten küçük bir yardımcı component
-- <CollapseButton /> Sadece mobil için kullanılan aç/kapa butonu
+## 🚀 Kullanılan Teknolojiler
 
-# Ana Yapı
+- **React + TypeScript**
+- **Redux Toolkit** – State yönetimi
+- **Tailwind CSS v4** – Custom :root theme tanımı
+- **React Router DOM** – Çok sayfalı yönlendirme
+- **Framer Motion** – Animasyonlar
+- **Lottie** – JSON animasyonları
+- **React Icons**
+- **i18next** – Çoklu dil desteği (EN/TR)
 
-Ana yapı:
+## 📌 Sayfa Yapısı
 
-React + TypeScript
+- `/home`
+- `/projects` (liste & detay)
+- `/about`
+- `/contact`
+- `/testimonials`
+- `/cv`
 
-Redux Toolkit (RTK) + Redux Thunk (API istekleri için)
+## 🎨 Özellikler
 
-Axios (API isteklerini yapmak için)
+- Responsive design (mobil öncelikli)
+- 3 Tema Desteği: `light`, `dark`, `sunset` (varsayılan)
+- Her sayfa için dil dosyaları: `data/{page}.ts`
+- Redux ile error/loading/success state yönetimi
+- Form inputları için Toastify uyarıları
+- Animasyonlu 404 ve teşekkür sayfası (Lottie)
 
-Responsive tasarım (Mobile First)
+## 🛠️ Kurulum
 
-Components ile temiz kod yapısı
+```bash
+cd client-side
+npm install
+npm run dev
+```
 
-Animasyonlar (Framer Motion veya sade CSS animasyonlar)
+## 📁 Yapı
 
-İcon setleri (örneğin: react-icons)
+components/
+features/
+pages/
+sections/
+store/
+└── features/{page}/
+├── thunks.ts
+├── slice.ts
+types/
