@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./router/AppRoutes";
 import Header from "./components/layouts/Header"; // Header'ı import ettik
+import { Analytics } from "@vercel/analytics/next"
 import Footer from "./components/layouts/Footer";
 //import GlobalBackdrop from "./components/common/GlobalBackdrop";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +21,7 @@ function App() {
       </div>
       {/* <GlobalBackdrop /> */}
       <ToastContainer position="top-right" autoClose={3000} />
+       <Analytics />
     </BrowserRouter>
   );
 }
