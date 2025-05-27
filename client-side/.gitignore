@@ -12,3 +12,4 @@ coverage/
 
 # OS dosyaları
 Thumbs.db
+.vercel
