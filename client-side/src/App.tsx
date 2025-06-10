@@ -4,7 +4,8 @@ import AppRoutes from "./router/AppRoutes";
 import Header from "./components/layouts/Header"; // Header'ı import ettik
 import Footer from "./components/layouts/Footer";
 //import GlobalBackdrop from "./components/common/GlobalBackdrop";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ScrollUp from "./components/layouts/Scroolup";
@@ -23,7 +24,8 @@ function App() {
         {/* <GlobalBackdrop /> */}
         <ToastContainer position="top-right" autoClose={3000} />
       </BrowserRouter>
-       <Analytics mode="production" />
+      <Analytics mode="production" />
+      <SpeedInsights />
     </>
   );
 }
