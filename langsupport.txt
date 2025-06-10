@@ -1,0 +1,8 @@
+lang desteği verdiğim sayfalar:
+use selector ile appten lang çekilip yerleştirilecek
+data:data/home.ts
+home page
+about component
+education component
+data:data/about.ts
+aboutpage.tsx

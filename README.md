@@ -1,6 +1,7 @@
 # Personal Portfolio – İdris Aktaş
 
 Tam kapsamlı bir full-stack portföy projesi.
+node-version: v22.14.0
 
 ## 🌐 Genel Amaç
 
@@ -87,4 +88,7 @@ docker-compose up --build
 #👤 Geliştirici İdris Aktaş
 
 🌐 [Web Sitesi] (https://my-website-omega-ten-64.vercel.app/)
-````
+
+```
+
+```

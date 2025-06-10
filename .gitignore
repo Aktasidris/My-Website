@@ -4,6 +4,7 @@ client-side/.env
 client-side/.next
 client-side/build
 client-side/dist
+client-side/langsupport.txt
 
 server-side/node_modules/
 server-side/.env
